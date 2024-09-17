@@ -1,0 +1,14 @@
+CC = g++
+CFLAGS = -Wall -std=c++11
+LIBS = -ljsoncpp  # Assuming you're using jsoncpp for JSON handling
+
+all: atm bank
+
+atm: atm.cpp
+	$(CC) $(CFLAGS) -o atm atm.cpp $(LIBS)
+
+bank: bank.cpp
+	$(CC) $(CFLAGS) -o bank bank.cpp $(LIBS)
+
+clean:
+	rm -f atm bank
