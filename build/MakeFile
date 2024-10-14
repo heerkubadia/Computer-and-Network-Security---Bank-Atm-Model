@@ -3,6 +3,9 @@
 # Compiler
 CXX = g++
 
+# Compiler flags
+CXXFLAGS = -Wall -Wextra -std=c++11
+
 # Source files
 ATM_SRC = atm.cpp
 BANK_SRC = bank.cpp
@@ -11,28 +14,17 @@ BANK_SRC = bank.cpp
 ATM = atm
 BANK = bank
 
-# Rules
+# Default target
 all: $(ATM) $(BANK)
 
+# Build ATM
 $(ATM): $(ATM_SRC)
-	$(CXX) -o $(ATM) $(ATM_SRC)
+	$(CXX) $(CXXFLAGS) -o $(ATM) $(ATM_SRC) -ljsoncpp
 
+# Build Bank
 $(BANK): $(BANK_SRC)
-	$(CXX) -o $(BANK) $(BANK_SRC)
+	$(CXX) $(CXXFLAGS) -o $(BANK) $(BANK_SRC)
 
+# Clean build artifacts
 clean:
 	rm -f $(ATM) $(BANK)
-CC = g++
-CFLAGS = -Wall -std=c++11
-LIBS = -ljsoncpp  # Assuming you're using jsoncpp for JSON handling
-
-all: atm bank
-
-atm: atm.cpp
-	$(CC) $(CFLAGS) -o atm atm.cpp $(LIBS)
-
-bank: bank.cpp
-	$(CC) $(CFLAGS) -o bank bank.cpp $(LIBS)
-
-clean:
-	rm -f atm bank
