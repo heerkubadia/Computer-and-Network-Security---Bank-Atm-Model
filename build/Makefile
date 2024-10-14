@@ -14,16 +14,19 @@ BANK_SRC = bank.cpp
 ATM = atm
 BANK = bank
 
+# Library path
+LIB_PATH = /opt/homebrew/lib
+
 # Default target
 all: $(ATM) $(BANK)
 
 # Build ATM
 $(ATM): $(ATM_SRC)
-	$(CXX) $(CXXFLAGS) -o $(ATM) $(ATM_SRC) -ljsoncpp
+	$(CXX) $(CXXFLAGS) -o $(ATM) $(ATM_SRC) -L$(LIB_PATH) -ljsoncpp
 
 # Build Bank
 $(BANK): $(BANK_SRC)
-	$(CXX) $(CXXFLAGS) -o $(BANK) $(BANK_SRC)
+	$(CXX) $(CXXFLAGS) -o $(BANK) $(BANK_SRC) -L$(LIB_PATH) -ljsoncpp
 
 # Clean build artifacts
 clean:
