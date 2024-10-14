@@ -1,3 +1,27 @@
+# Makefile for ATM and Bank
+
+# Compiler
+CXX = g++
+
+# Source files
+ATM_SRC = atm.cpp
+BANK_SRC = bank.cpp
+
+# Executables
+ATM = atm
+BANK = bank
+
+# Rules
+all: $(ATM) $(BANK)
+
+$(ATM): $(ATM_SRC)
+	$(CXX) -o $(ATM) $(ATM_SRC)
+
+$(BANK): $(BANK_SRC)
+	$(CXX) -o $(BANK) $(BANK_SRC)
+
+clean:
+	rm -f $(ATM) $(BANK)
 CC = g++
 CFLAGS = -Wall -std=c++11
 LIBS = -ljsoncpp  # Assuming you're using jsoncpp for JSON handling
