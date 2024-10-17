@@ -6,11 +6,12 @@ CXX = g++
 # Compiler flags
 CXXFLAGS = -Wall -Wextra -std=c++11 -I/opt/homebrew/include
 
-# Library path
-LIB_PATH = /opt/homebrew/Cellar/jsoncpp/1.9.5/lib
+# Library paths
+JSON_LIB_PATH = /opt/homebrew/Cellar/jsoncpp/1.9.5/lib
+SSL_LIB_PATH = /opt/homebrew/Cellar/openssl@3/lib
 
 # Libraries
-LIBS = -ljsoncpp
+LIBS = -ljsoncpp -lssl -lcrypto
 
 # Source files
 ATM_SRC = atm_locally_working_18oct.cpp
@@ -26,12 +27,18 @@ all: $(ATM) $(BANK)
 
 # Build ATM
 $(ATM): $(ATM_SRC)
-	$(CXX) $(CXXFLAGS) -o $@ $^ -L$(LIB_PATH) $(LIBS)
+	@echo "Building $(ATM)..."
+	$(CXX) $(CXXFLAGS) -o $@ $^ -L$(JSON_LIB_PATH) -L$(SSL_LIB_PATH) $(LIBS)
+	@echo "$(ATM) built successfully."
 
 # Build Bank
 $(BANK): $(BANK_SRC)
-	$(CXX) $(CXXFLAGS) -o $@ $^ -L$(LIB_PATH) $(LIBS)
+	@echo "Building $(BANK)..."
+	$(CXX) $(CXXFLAGS) -o $@ $^ -L$(JSON_LIB_PATH) -L$(SSL_LIB_PATH) $(LIBS)
+	@echo "$(BANK) built successfully."
 
 # Clean build artifacts
 clean:
+	@echo "Cleaning up..."
 	rm -f $(ATM) $(BANK)
+	@echo "Cleanup complete."
