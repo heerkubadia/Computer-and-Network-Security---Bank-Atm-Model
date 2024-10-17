@@ -4,7 +4,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -Wall -Wextra -std=c++11 -I/opt/homebrew/include
+CXXFLAGS = -Wall -Wextra -std=c++11 -I/opt/homebrew/include -I/opt/homebrew/Cellar/openssl@3/include
 
 # Library paths
 JSON_LIB_PATH = /opt/homebrew/Cellar/jsoncpp/1.9.5/lib
