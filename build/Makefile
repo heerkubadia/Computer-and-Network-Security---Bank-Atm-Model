@@ -7,7 +7,7 @@ CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++11 -I/opt/homebrew/include
 
 # Library path
-LIB_PATH = /opt/homebrew/lib
+LIB_PATH = /opt/homebrew/Cellar/jsoncpp/1.9.5/lib
 
 # Libraries
 LIBS = -ljsoncpp
