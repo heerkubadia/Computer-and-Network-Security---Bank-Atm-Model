@@ -83,13 +83,16 @@ string hash_password(const string &password) {
 }
 
 string generate_session_id() {
-    const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const char charset[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                           "abcdefghijklmnopqrstuvwxyz"
+                           "0123456789"
+                           "!@#$%^&*()-_=+[]{};:,.<>?";
     random_device rd; // Seed for random number generator
     mt19937 gen(rd());
-    uniform_int_distribution<> dis(0, 25);
+    uniform_int_distribution<> dis(0, sizeof(charset) - 2); // Last character is null terminator
 
     string session_id;
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 32; i++) { // Increased length to 32 characters
         session_id += charset[dis(gen)];
     }
     return session_id;
