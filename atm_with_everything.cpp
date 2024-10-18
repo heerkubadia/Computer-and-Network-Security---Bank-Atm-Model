@@ -5,6 +5,7 @@
 #include <string>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <fstream>
 
 // Function to hash password using SHA-256
 std::string hash_password(const std::string& password) {
@@ -18,6 +19,23 @@ std::string hash_password(const std::string& password) {
     }
     return std::string(hash_string);
 }
+
+
+// Function to read server IP from a file
+std::string read_server_ip(const std::string& file_path) {
+    std::ifstream file(file_path);
+    std::string ip_address;
+    if (file.is_open()) {
+        std::getline(file, ip_address); // the first line contains the ip
+        file.close();
+    } else {
+        std::cerr << "Unable to open IP address file." << std::endl;
+        exit(1);
+    }
+    return ip_address;
+}
+
+
 
 int main() {
     // Initialize OpenSSL library
@@ -46,6 +64,9 @@ int main() {
         return 1;
     }
 
+    // Read server IP address from file
+    std::string server_ip = read_server_ip("server_ip.txt");
+
     // Create TCP socket
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -56,7 +77,7 @@ int main() {
     struct sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(8088); // Server's port
-    inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr); // Bank server's IP
+    inet_pton(AF_INET, server_ip.c_str(), &serv_addr.sin_addr); // Bank server's IP
 
     // Connect to server
     if (connect(sockfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
