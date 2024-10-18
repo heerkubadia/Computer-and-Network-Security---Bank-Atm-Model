@@ -169,6 +169,7 @@ void handle_client_request(SSL *ssl) {
                 string username = active_sessions[session_id];
                 user_balances[username] += amount;
                 response = "Deposited $" + to_string(amount) + ". New balance: $" + to_string(user_balances[username]);
+                updateuser_database("user_database.csv");
             } else {
                 response = "Invalid session!";
             }
@@ -186,6 +187,7 @@ void handle_client_request(SSL *ssl) {
                 if (user_balances[username] >= amount) {
                     user_balances[username] -= amount;
                     response = "Withdrew $" + to_string(amount) + ". New balance: $" + to_string(user_balances[username]);
+                    updateuser_database("user_database.csv");
                 } else {
                     response = "Insufficient funds!";
                 }
