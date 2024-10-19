@@ -37,7 +37,9 @@ std::string hash_password(const std::string &password)
     char hash_string[2 * SHA256_DIGEST_LENGTH + 1];
     for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i)
     {
-        sprintf(hash_string + (i * 2), "%02x", hash[i]);
+        // sprintf(hash_string + (i * 2), "%02x", hash[i]);
+        snprintf(hash_string + (i * 2), 3, "%02x", hash[i]);
+
     }
     return std::string(hash_string);
 }
