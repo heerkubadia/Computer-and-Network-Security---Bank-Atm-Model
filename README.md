@@ -34,7 +34,7 @@ Our model has the following functionalities corresponding to the requirements of
 7. Functionality corresponding to the SIGTERM signal (to terminate the ATM application): For a user who has an active session going on, they can use the ‘logout’ option to end the session to go back to the three original options (register, login or exit). Then, selecting ‘exit’ will terminate the ATM application
 8. -p <port>: We are using the port to establish a connection between the bank server and the ATM.
 
-##Configuring the ATM-Bank Model
+## Configuring the ATM-Bank Model
 
 Follow these steps to configure the ATM-Bank model:
 
