@@ -13,7 +13,7 @@ LIBS = -ljsoncpp -lssl -lcrypto
 
 # Source files
 ATM_SRC = atm_locally_working_18oct.cpp
-BANK_SRC = bank_locally_working_18oct.cpp
+BANK_SRC = bank_final.cpp
 
 # Executables
 ATM = atm
