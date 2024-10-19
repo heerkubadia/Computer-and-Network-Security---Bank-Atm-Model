@@ -12,8 +12,8 @@ SSL_LIB_PATH = /opt/homebrew/Cellar/openssl@3/3.3.2/lib  # Updated path to OpenS
 LIBS = -ljsoncpp -lssl.3 -lcrypto.3  # Updated to link against OpenSSL version 3
 
 # Source files
-ATM_SRC = atm_locally_working_18oct.cpp
-BANK_SRC = bank_locally_working_18oct.cpp
+ATM_SRC = atm_final.cpp
+BANK_SRC = bank_final.cpp
 
 # Executables
 ATM = atm
