@@ -1,6 +1,6 @@
 # Computer and Network Security Project: Secure Banking Communication Bank-ATM Model
 In this project, we have aimed to create a Bank-ATM network and security model. The model consists of two C++ programs: the bank (which acts as the server) and the ATM (which acts as the client). The ATM program allows customers to interactively perform operations such as account creation, deposits, withdrawals, balance checks and transaction history. The bank server handles the requests received from the atm using a database that stores the relevant information of registered users. The communication between the bank and the ATM happens over a secure network. Various security aspects - confidentiality, integrity and authentication have been addressed in the model. The user interface looks like this:
-
+![interface](interface_image.png)
 At the ATM (client) side, the user is prompted to choose one of rhe following three options: 
 1. Register (for a new account creation): 
 Enter Username: If the username does not meet the specified requirements, the user will be asked to enter a new one and will continue to do so until a valid username is provided. 
@@ -9,11 +9,11 @@ Enter Initial Deposit amount: Here, the user enters the initial amount to be dep
 ---
 2. Login (for existing users) - The server checks the username and password (hash). If they match, the bank generates a session ID using generate_session_id() and stores it in the active_sessions map. Response: "Login successful! SessionID: <id>" or "Invalid username or password!"
 If the username and password do not match, the bank sends the response: “Invalid Username or Password”. Once a registered user has successfully logged in, a unique session ID gets generated, active for the entire duration that the user stays logged in. The user then gets prompted to choose one of the following options: 
-1. Check account balance - The session ID is sent along with the command to check balance to the bank, and the server responds with the user's current balance.
-2. Deposit money - The user enters an amount to deposit, and this is sent to the server along with the session ID. The server updates the balance and sends back the new balance. The user input also gets validated before the request is sent to the server (i.e., if the entered value is numeric, non-negative, etc).
-3. Withdraw money - Similar to deposit, the user enters an amount to withdraw. The bank checks if there are enough funds, then deducts the amount from the balance and sends back the updated balance. The user input also gets validated before the request is sent to the server.  If the transaction would result in a negative balance, an appropriate message is displayed on the ATM side, and the transaction is canceled.
-4. View past transactions (additional functionality) - The user can check the past transactions made along with the timestamps of the transactions using this option. The bank logs the transaction history of active users in a separate csv file. It retrieves the information from that file upon receiving this request.
-5. Logout (terminate the session) - The session is terminated, and the user is again prompted to choose from register, login and exit.
+* Check account balance - The session ID is sent along with the command to check balance to the bank, and the server responds with the user's current balance.
+* Deposit money - The user enters an amount to deposit, and this is sent to the server along with the session ID. The server updates the balance and sends back the new balance. The user input also gets validated before the request is sent to the server (i.e., if the entered value is numeric, non-negative, etc).
+* Withdraw money - Similar to deposit, the user enters an amount to withdraw. The bank checks if there are enough funds, then deducts the amount from the balance and sends back the updated balance. The user input also gets validated before the request is sent to the server.  If the transaction would result in a negative balance, an appropriate message is displayed on the ATM side, and the transaction is canceled.
+* View past transactions (additional functionality) - The user can check the past transactions made along with the timestamps of the transactions using this option. The bank logs the transaction history of active users in a separate csv file. It retrieves the information from that file upon receiving this request.
+* Logout (terminate the session) - The session is terminated, and the user is again prompted to choose from register, login and exit.
 ---
 3. Exit: This option is used  to close the application and exit the program.
 ---
