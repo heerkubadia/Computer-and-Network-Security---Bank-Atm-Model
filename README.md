@@ -34,6 +34,25 @@ Our model has the following functionalities corresponding to the requirements of
 7. Functionality corresponding to the SIGTERM signal (to terminate the ATM application): For a user who has an active session going on, they can use the ‘logout’ option to end the session to go back to the three original options (register, login or exit). Then, selecting ‘exit’ will terminate the ATM application
 8. -p <port>: We are using the port to establish a connection between the bank server and the ATM.
 
+## Security Aspects
+### For Authentication
+As mentioned, the auth file ensures mutual authentication between the bank and the ATM. The method has been described below.
+### For Network Communication
+To ensure secure communication over the network between the ATM and the bank, we have used the OpenSSL library, which implements the Transport Layer Security (TLS) and Secure Sockets Layer (SSL) protocols for secure network communication. The current protocol in use, TLS, ensures security through encryption, message integrity, authentication (via digital certificates), and secure key exchange algorithms.
+
+We created a central, trusted certificate authority (CA) which issues and verifies certificates for both the bank and the ATM to ensure mutual authentication. This certificate verification is also a part of the TLS handshake between the client and server. 
+
+The CA is a trusted third party that verifies the identities of both the server and the client, issuing certificates that contain their public keys. The certificates prove the ownership of the public key, ensuring that the holder of the certificate (server or client) is the legitimate owner of that key. The server presents its digital certificate to the client during the TLS handshake. This certificate includes the server's public key, and it is signed by a trusted CA. The CA's signature ensures that the server certificate is genuine and can be trusted.
+
+The client verifies this certificate by checking the CA's signature using the CA's public key, which is already trusted by the client.
+With client-side certificates (mutual TLS), the client also presents a certificate to the server after verifying the server's certificate.
+
+This certificate contains the client’s public key and is signed by a CA. The server verifies the client's certificate in a similar way, using a trusted CA to confirm that the certificate is genuine.
+We generated the required certificates and keys and saved them in the same directory as the ATM and bank programs (their respective certificates). OpenSSL has commands that facilitate the generation of certificate authority, keys and certificates for the client and server.
+### For Secure Storage of Confidential Information
+The server’s database stores the registered users’ usernames, passwords and their current account balances. We are not transmitting or storing the passwords as they are - we hash them using SHA256 hashing for added protection.
+We enhanced the strength of all ciphers used in our TLS protocol by employing the SSL_CTX_set_cipher_list() function. It is used to specify the cipher suites that should be used for SSL/TLS connections. Cipher suites are sets of cryptographic algorithms that are used to secure communications over SSL/TLS. 
+
 ## Configuring the ATM-Bank Model
 
 Follow these steps to configure the ATM-Bank model:
