@@ -1,5 +1,3 @@
-# Makefile for ATM and Bank
-
 # Compiler
 CXX = g++
 
@@ -42,3 +40,12 @@ clean:
 	@echo "Cleaning up..."
 	rm -f $(ATM) $(BANK)
 	@echo "Cleanup complete."
+
+# Check library paths
+check:
+	@echo "Checking library paths..."
+	@if [ -d "$(JSON_LIB_PATH)" ]; then echo "JSON Library Path: Exists"; else echo "JSON Library Path: Not Found"; fi
+	@if [ -d "$(SSL_LIB_PATH)" ]; then echo "SSL Library Path: Exists"; else echo "SSL Library Path: Not Found"; fi
+	@if [ -f "$(JSON_LIB_PATH)/libjsoncpp.dylib" ]; then echo "JSON Library: Exists"; else echo "JSON Library: Not Found"; fi
+	@if [ -f "$(SSL_LIB_PATH)/libssl.dylib" ]; then echo "SSL Library: Exists"; else echo "SSL Library: Not Found"; fi
+	@if [ -f "$(SSL_LIB_PATH)/libcrypto.dylib" ]; then echo "Crypto Library: Exists"; else echo "Crypto Library: Not Found"; fi
